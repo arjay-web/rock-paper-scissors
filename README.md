@@ -16,6 +16,6 @@ A simple Rock-Paper-Scissors game built using JavaScript. This version runs in t
 
 ## Preview
 
----
+![Game Preview](screenshot.png)
 
 Built with 💻 by Arjay Dimaunahan

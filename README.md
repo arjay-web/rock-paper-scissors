@@ -1,21 +1,21 @@
-# Rock Paper Scissors (Console Game)
+# Rock Paper Scissors 🎮
 
-A simple Rock-Paper-Scissors game built using JavaScript. This version runs in the browser console.
+A simple Rock-Paper-Scissors game built with HTML, CSS, and JavaScript.  
+Play against the computer and see who wins!  
 
-## How to Play
+## Live Demo
+[Click here to play!](https://arjay-web.github.io/rock-paper-scissors/)
 
-1. Open the browser.
-2. Open Developer Tools (press `F12` or `Ctrl+Shift+I`).
-3. Run the script and follow the prompt to input your choice.
-4. First to win 5 rounds wins the game!
+## Screenshot
+![Game Screenshot](images/screenshot.jpg)
 
-## Tech Stack
+## Features
+- Player vs Computer gameplay
+- Random computer choices
+- Interactive UI
+- Score tracking
 
+## Technologies Used
 - HTML
-- JavaScript (Vanilla)
-
-## Preview
-
-![Game Preview](screenshot.png)
-
-Built with 💻 by Arjay Dimaunahan
+- CSS
+- JavaScript

@@ -1,3 +1,12 @@
+const btnPick = document.querySelectorAll(".btnPick");
+const message = document.querySelector("#message");
+const scoreBoardComputer = document.querySelector(".computerScore");
+const scoreBoardHuman = document.querySelector(".humanScore");
+
+let humanScore = 0;
+let computerScore = 0;
+scoreBoardHuman.textContent = humanScore;
+scoreBoardComputer.textContent = computerScore;
 
 function getComputerChoice(){
    let computerChoice = Math.floor(Math.random() * 3)
@@ -10,62 +19,46 @@ function getComputerChoice(){
    }
 }
 
-function getHumanChoice (){
-    let humanChoice = prompt("Input your pick");
-  return humanChoice;
-}
-
-    let humanScore = 0;
-    let computerScore = 0;
-
 function playRound(humanChoice, computerChoice){
-   const userChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
-   if(userChoice === "Rock" && computerChoice === "Paper"){
-    console.log("You Lose!!! Paper beats Rock");
-    computerScore++;
-   }else if(userChoice === "Rock" && computerChoice === "Scissors"){
-    console.log("You Win!!! Rock beats Scissors");
-    humanScore++;
-   }else if(userChoice === "Rock" && computerChoice === "Rock"){
-    console.log("Its a Draw!!!");
-   }else if(userChoice === "Paper" && computerChoice === "Rock"){
-    console.log("You Win!!! Paper beats Rock");
-    humanScore++;
-   }else if(userChoice === "Paper" && computerChoice === "Scissors"){
-    console.log("You Lose!!! Scissors beats Paper");
-    computerScore++;
-   }else if(userChoice === "Paper" && computerChoice === "Paper"){
-    console.log("Its a Draw");
-   }else if(userChoice === "Scissors" && computerChoice === "Paper"){
-    console.log("You Win!!! Scissors beats Paper");
-    humanScore++;
-   }else if(userChoice === "Scissors" && computerChoice === "Rock"){
-    console.log("You Lose!!! Rock beats Scissors");
-    computerScore++;
-   }else{
-    console.log("Its a Draw");
-   }
-}
-let gameRound = 1;
-function playGame(){
-    
-    if(gameRound <= 5){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        gameRound++;
-        console.log(`Human: ${humanScore} Computer: ${computerScore}`)
-        playGame();
-    }else if(gameRound === 6){
-        if(humanScore > computerScore){
-            console.log(`Human Win`);
-        }else if(humanScore < computerScore){
-            console.log(`Computer Win`);
-        }else{
-            console.log("We have a draw");
-        }
+    if(humanChoice === computerChoice){
+        return message.textContent =  `It's a draw`;
     }
 
+    if((humanChoice === "Rock" && computerChoice === "Scissors")||
+    (humanChoice === "Paper" && computerChoice === "Rock") ||
+    (humanChoice === "Scissors" && computerChoice === "Paper") 
+    ){
+        message.textContent = `1 point for you: ${humanChoice} beats ${computerChoice}`
+        humanScore++;
+        scoreBoardHuman.textContent = humanScore;
+    }else if((computerChoice === "Rock" && humanChoice === "Scissors")||
+    (computerChoice === "Paper" && humanChoice === "Rock") ||
+    (computerChoice === "Scissors" && humanChoice === "Paper")){
+        message.textContent = `1 point for computer: ${computerChoice} beats ${humanChoice}`
+        computerScore++;
+        scoreBoardComputer.textContent = computerScore;
+    }
+     
 }
 
-playGame();
+function resetGame(){
+    humanScore = 0;
+    computerScore = 0;
+    scoreBoardHuman.textContent = humanScore;
+    scoreBoardComputer.textContent = computerScore;
+}
+
+btnPick.forEach(button=>{
+    button.addEventListener('click', ()=>{
+        const computerSelection = getComputerChoice();
+        playRound(button.value, computerSelection)
+        if(humanScore === 5 || computerScore === 5){
+            if(humanScore === 5){
+                message.textContent = `You win!!! With the score of ${humanScore}:${computerScore}`
+            }else{
+                message.textContent = `Computer win!!! With the score of ${computerScore}:${humanScore}`
+            }
+            resetGame();
+        }
+    })
+})
